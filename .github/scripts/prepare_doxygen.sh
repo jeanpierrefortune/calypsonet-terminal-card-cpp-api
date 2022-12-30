@@ -17,6 +17,13 @@ git clone --branch gh-pages https://github.com/calypsonet/"$repository_name".git
 
 cd "$repository_name" || exit
 
+echo "Create directory listing" >list_versions.md
+for directory in $(ls -rd [0-9]*/ | cut -f1 -d'/'); do
+  echo "| $directory |" >>list_versions.md
+done
+echo "Directory listing:"
+cat list_versions.md
+
 echo "Delete existing SNAPSHOT directory..."
 rm -rf ./*-SNAPSHOT
 
