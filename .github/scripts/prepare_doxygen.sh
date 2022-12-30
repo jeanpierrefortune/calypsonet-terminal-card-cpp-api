@@ -15,16 +15,14 @@ repository_name=$(git rev-parse --show-toplevel | xargs basename)
 echo "Clone $repository_name..."
 git clone --branch gh-pages https://github.com/calypsonet/"$repository_name".git
 
-echo "| Version | Documents |" >list_versions.md
-echo "|:---:|---|" >>list_versions.md
-for directory in $(ls -rd [0-9]*/ | cut -f1 -d'/'); do
-  echo "| $directory | [API documentation]($directory) |" >>list_versions.md
-done
-
-echo "Computed all versions:"
-cat list_versions.md
-
 cd "$repository_name" || exit
+
+echo "Create directory listing" >list_versions.md
+for directory in $(ls -rd [0-9]*/ | cut -f1 -d'/'); do
+  echo "| $directory |" >>list_versions.md
+done
+echo "Directory listing:"
+cat list_versions.md
 
 echo "Delete existing SNAPSHOT directory..."
 rm -rf ./*-SNAPSHOT
