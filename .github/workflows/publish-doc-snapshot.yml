@@ -1,4 +1,4 @@
-name: Publish API documentation
+name: Publish API documentation (snapshot)
 
 on:
   push:
@@ -16,12 +16,9 @@ jobs:
           fetch-depth: 0
       - name: Make scripts executable
         run: chmod +x ./.github/scripts/*.sh
-      - name: Check version
-        working-directory: .
-        run: ./.github/scripts/check_version.sh
       - name: Patch Doxyfile
         working-directory: .
-        run: ./.github/scripts/patch_doxyfile.sh
+        run: ./.github/scripts/patch_doxyfile.sh "-SNAPSHOT"
       - name: Generate project documentation with Doxygen
         uses: mattnotmitt/doxygen-action@v1.9.2
         with:
