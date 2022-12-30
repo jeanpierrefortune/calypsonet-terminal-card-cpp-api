@@ -18,7 +18,7 @@ jobs:
         run: chmod +x ./.github/scripts/*.sh
       - name: Patch Doxyfile
         working-directory: .
-        run: ./.github/scripts/patch_doxyfile.sh "-SNAPSHOT"
+        run: ./.github/scripts/patch_doxyfile.sh
       - name: Generate project documentation with Doxygen
         uses: mattnotmitt/doxygen-action@v1.9.2
         with:
