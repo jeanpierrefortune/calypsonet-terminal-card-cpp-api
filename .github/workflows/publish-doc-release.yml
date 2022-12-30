@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  publish-doc:
+  publish-doc-release:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code from ${{ github.repository }}/${{ github.ref }}
@@ -16,7 +16,7 @@ jobs:
         run: chmod +x ./.github/scripts/*.sh
       - name: Check version
         working-directory: .
-        run: ./.github/scripts/check_version.sh
+        run: ./.github/scripts/check_version.sh $(echo "${{ github.ref }}" | sed -e "s,^refs/tags/,,")
       - name: Patch Doxyfile
         working-directory: .
         run: ./.github/scripts/patch_doxyfile.sh
